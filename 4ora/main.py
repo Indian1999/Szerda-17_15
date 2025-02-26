@@ -11,20 +11,22 @@ for i in range(len(map)):
         if map[i][j] == "#":
             score_map[i][j] = "#"
 
+# alt + bal click -> új kurzort hoz létre
 def possible_moves(i,j):
     moves = []
-    if i > 0 and (score_map[i-1][j] == "." or score_map[i-1][j] >= score_map[i][j] + 2):
+    if i > 0 and (score_map[i-1][j] == "." or int(score_map[i-1][j]) >= int(score_map[i][j]) + 2):
         moves.append("up")
-    if i < len(score_map) - 1 and (score_map[i+1][j] == "." or score_map[i+1][j] >= score_map[i][j] + 2):
+    if i < len(score_map) - 1 and (score_map[i+1][j] == "." or int(score_map[i+1][j]) >= int(score_map[i][j]) + 2):
         moves.append("down")
-    if j < len(score_map[i]) - 1 and (score_map[i][j+1] == "." or score_map[i][j+1] >= score_map[i][j] + 2):
+    if j < len(score_map[i]) - 1 and (score_map[i][j+1] == "." or int(score_map[i][j+1]) >= int(score_map[i][j]) + 2):
         moves.append("right")
-    if j > 0 and (score_map[i][j-1] == "." or score_map[i][j-1] >= score_map[i][j] + 2):
+    if j > 0 and (score_map[i][j-1] == "." or int(score_map[i][j-1]) >= int(score_map[i][j]) + 2):
         moves.append("left")
     return moves
 
 def find_values(i,j):
     moves = possible_moves(i,j)
+    print(moves)
 
 #Keressük meg a kijáratot:
 for i in range(len(map)):
