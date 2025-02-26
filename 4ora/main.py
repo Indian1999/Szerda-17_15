@@ -28,7 +28,18 @@ def possible_moves(i,j):
 
 def find_values(i,j):
     moves = possible_moves(i,j)
-    print(moves)
+    if "up" in moves:
+        score_map[i-1][j] = score_map[i][j] + 1
+        find_values(i-1, j)
+    if "down" in moves:
+        score_map[i+1][j] = score_map[i][j] + 1
+        find_values(i+1, j)
+    if "right" in moves:
+        score_map[i][j+1] = score_map[i][j] + 1
+        find_values(i, j+1)
+    if "left" in moves:
+        score_map[i][j-1] = score_map[i][j] + 1
+        find_values(i, j-1)
 
 #Keressük meg a kijáratot:
 for i in range(len(map)):
@@ -36,3 +47,6 @@ for i in range(len(map)):
         if map[i][j] == "E":
             score_map[i][j] = 0
             find_values(i,j)
+            
+for row in score_map:
+    print(row)
