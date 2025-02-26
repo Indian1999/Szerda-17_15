@@ -11,11 +11,15 @@ for i in range(len(map)):
         if map[i][j] == "#":
             score_map[i][j] = "#"
 
+def possible_moves(i,j):
+    moves = []
 
 def find_values(i,j):
-    pass
+    moves = possible_moves(i,j)
 
+#Keressük meg a kijáratot:
 for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "E":
+            score_map[i][j] = 0
             find_values(i,j)
