@@ -9,7 +9,7 @@ score_map = [["." for j in range(len(map[i]))] for i in range(len(map))]
 for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "#":
-            score_map[i][j] = "#"
+            score_map[i][j] = -1
 
 # alt + bal click -> új kurzort hoz létre
 def possible_moves(i,j):
