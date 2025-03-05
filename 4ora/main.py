@@ -3,7 +3,7 @@ import numpy as np              # pip install numpy
 
 # Input beolvasása:
 map = []
-with open("4ora/input.txt", "r", encoding="utf-8") as f:
+with open("4ora/input2.txt", "r", encoding="utf-8") as f:
    for line in f:
        map.append(list(line.strip())) 
 
