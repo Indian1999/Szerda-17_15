@@ -64,18 +64,37 @@ plt.axis("off")
 plt.savefig("4ora\images\heatmap.png")
 plt.close()
 
-path_matrix = [[0 for j in range(len(map[i]))] for i in range(len(map))]
+path_matrix = np.zeros((len(map), len(map[0]), 3))
 for i in range(len(map)):
     for j in range(len(map[i])):
-        
-        
+        if map[i][j] == "#":
+            path_matrix[i, j] = [0,0,0]
+        else:
+            path_matrix[i, j] = [1,1,1]
+
+plt.imshow(path_matrix)
+plt.savefig("4ora\images\labirinth_map.png")   
+plt.close()
+  
 def find_path(i,j):
-    pass
+    path_matrix[i,j] = [0,1,0]
+    if score_map[i][j] != 0:
+        if score_map[i][j+1] + 1 == score_map[i][j]:
+            find_path(i, j+1)
+        elif score_map[i][j-1] + 1 == score_map[i][j]:
+            find_path(i, j-1)
+        elif score_map[i+1][j] + 1 == score_map[i][j]:
+            find_path(i+1, j)
+        elif score_map[i-1][j] + 1 == score_map[i][j]:
+            find_path(i-1, j)
 
 for i in range(len(map)):
     for j in range(len(map[i])):
         if map[i][j] == "S":
             find_path(i,j)
+
+plt.imshow(path_matrix)
+plt.show()
             
 
     
