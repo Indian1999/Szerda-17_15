@@ -51,7 +51,15 @@ for i in range(len(map)):
             score_map[i][j] = 0
             find_values(i,j)
             
-
+labirint = score_map[:]
+for i in range(len(labirint)):
+    for j in range(len(labirint[i])):
+        if labirint[i][j] == -1:
+            labirint[i][j] = [0, 0, 0]
+        else:
+            labirint[i][j] = [labirint[i][j] * 3 / 255, 0, 0]
+plt.imshow(labirint)
+plt.show()
             
 
     
