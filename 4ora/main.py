@@ -51,7 +51,7 @@ for i in range(len(map)):
             score_map[i][j] = 0
             find_values(i,j)
             
-labirint = score_map.copy()
+labirint = [row[:] for row in score_map]
 for i in range(len(labirint)):
     for j in range(len(labirint[i])):
         if labirint[i][j] == -1:
@@ -76,7 +76,6 @@ plt.imshow(path_matrix)
 plt.savefig("4ora\images\labirinth_map.png")   
 plt.close()
 
-print(score_map)
 def find_path(i,j):
     path_matrix[i,j] = [0,1,0]
     if score_map[i][j] != 0:
