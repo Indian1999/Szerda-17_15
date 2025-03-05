@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt # terminálba: pip install matplotlib
+import numpy as np              # pip install numpy
+
 # Input beolvasása:
 map = []
 with open("4ora/input.txt", "r", encoding="utf-8") as f:
@@ -48,5 +51,7 @@ for i in range(len(map)):
             score_map[i][j] = 0
             find_values(i,j)
             
-for row in score_map:
-    print(row)
+
+            
+
+    
