@@ -94,7 +94,8 @@ for i in range(len(map)):
             find_path(i,j)
 
 plt.imshow(path_matrix)
-plt.show()
+plt.savefig("4ora\images\optimal_path.png")
+plt.close()
             
 
     
