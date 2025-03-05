@@ -57,9 +57,25 @@ for i in range(len(labirint)):
         if labirint[i][j] == -1:
             labirint[i][j] = [0, 0, 0]
         else:
-            labirint[i][j] = [labirint[i][j] * 3 / 255, 0, 0]
+            labirint[i][j] = [(labirint[i][j] + 20) / 70, 0, 0]
 plt.imshow(labirint)
-plt.show()
+plt.title("Labirinth heatmap")
+plt.axis("off")
+plt.savefig("4ora\images\heatmap.png")
+plt.close()
+
+path_matrix = [[0 for j in range(len(map[i]))] for i in range(len(map))]
+for i in range(len(map)):
+    for j in range(len(map[i])):
+        
+        
+def find_path(i,j):
+    pass
+
+for i in range(len(map)):
+    for j in range(len(map[i])):
+        if map[i][j] == "S":
+            find_path(i,j)
             
 
     
