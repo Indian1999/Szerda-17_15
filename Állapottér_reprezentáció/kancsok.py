@@ -55,7 +55,30 @@ G.add_edge((0, 3, 2), (0, 0, 5))  #E32
 G.add_edge((0, 3, 2), (2, 3, 0))  #E33
 G.add_edge((0, 3, 2), (2, 1, 2))  #E34
 
-
 layout = nx.kamada_kawai_layout(G)
 nx.draw(G, layout, with_labels = True, arrows = True)
-plt.show()
+plt.savefig("Állapottér_reprezentáció/állapottér.png")
+plt.close()
+
+end_nodes = []
+for node in G.nodes():
+    if node[0] == 1: # Ha a 2 literes kancsóban 1 liter víz van
+        end_nodes.append(node)
+
+
+def plot_path(path, filename = "default.png"):
+    solution = nx.DiGraph()
+    solution.add_nodes_from(path)
+    for i in range(len(path) - 1):
+        solution.add_edge(path[i], path[i+1])
+    layout = nx.circular_layout(solution)
+    nx.draw(solution, layout, with_labels=True, arrows=True)
+    plt.savefig(f"Állapottér_reprezentáció/{filename}")
+    plt.close()
+        
+paths = list(nx.all_simple_paths(G, start_node, end_nodes))
+print(len(paths))
+paths.sort(key = lambda x: len(x))
+print("A legrövidebb útvonal:", paths[0])
+for i in range(len(paths)):
+    plot_path(paths[i], f"útvonal{i+1}.png")
