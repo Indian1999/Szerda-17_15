@@ -57,7 +57,7 @@ G.add_edge((0, 3, 2), (2, 1, 2))  #E34
 
 layout = nx.kamada_kawai_layout(G)
 nx.draw(G, layout, with_labels = True, arrows = True)
-plt.savefig("Állapottér_reprezentáció/állapottér.png")
+plt.savefig("Állapottér_reprezentáció/Képek/állapottér.png")
 plt.close()
 
 end_nodes = []
@@ -73,7 +73,7 @@ def plot_path(path, filename = "default.png"):
         solution.add_edge(path[i], path[i+1])
     layout = nx.circular_layout(solution)
     nx.draw(solution, layout, with_labels=True, arrows=True)
-    plt.savefig(f"Állapottér_reprezentáció/{filename}")
+    plt.savefig(f"Állapottér_reprezentáció/Képek/{filename}")
     plt.close()
         
 paths = list(nx.all_simple_paths(G, start_node, end_nodes))
