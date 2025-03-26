@@ -51,7 +51,8 @@ for a in range(8):
                                 chess_board[6][g] = 1
                                 chess_board[7][h] = 1
                                 
-                                is_valid_chess_board()
+                                if is_valid_chess_board():
+                                    print(a,b,c,d,e,f,g,h)
                                 
                                 chess_board[0][a] = 0
                                 chess_board[1][b] = 0
