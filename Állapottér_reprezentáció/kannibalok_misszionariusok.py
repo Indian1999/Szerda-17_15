@@ -1,5 +1,5 @@
 import networkx as nx
-import mathplotplib.pyplot as plt
+import matplotlib.pyplot as plt
 
 G = nx.DiGraph()
 
@@ -28,7 +28,7 @@ while len(open_list) > 0:
                 G.add_node(new_node)
             G.add_edge(current_node, new_node)
         
-        if 3 - (current_node[1] - 1) <= 3 - current_node[0]: # 1 kannibál
+        if 3 - (current_node[1] - 1) <= 3 - current_node[0] or current_node[0] == 3: # 1 kannibál
             new_node = (current_node[0], current_node[1] - 1, 0)
             if new_node not in visited:
                 open_list.append(new_node)
@@ -36,7 +36,7 @@ while len(open_list) > 0:
                 G.add_node(new_node)
             G.add_edge(current_node, new_node)
             
-        if 3 - (current_node[1] - 2) <= 3 - current_node[0]: # 2 kannibál
+        if 3 - (current_node[1] - 2) <= 3 - current_node[0] or current_node[0] == 3: # 2 kannibál
             new_node = (current_node[0], current_node[1] - 2, 0)
             if new_node not in visited:
                 open_list.append(new_node)
@@ -52,6 +52,44 @@ while len(open_list) > 0:
                 G.add_node(new_node)
             G.add_edge(current_node, new_node)
     else:
-        pass # jobb parton
+        if 3 - (current_node[0] + 1) >= 3 - current_node[1] or current_node[0] == 2: # 1 misszionárius
+            new_node = (current_node[0] + 1, current_node[1], 1)
+            if new_node not in visited:
+                open_list.append(new_node)
+                visited.append(new_node)
+                G.add_node(new_node)
+            G.add_edge(current_node, new_node)
+            
+        if 3 - (current_node[0] + 2) >= 3 - current_node[1] or current_node[0] == 1: # 2 misszionárius
+            new_node = (current_node[0] + 2, current_node[1], 1)
+            if new_node not in visited:
+                open_list.append(new_node)
+                visited.append(new_node)
+                G.add_node(new_node)
+            G.add_edge(current_node, new_node)
+            
+        if current_node[0] >= current_node[1] + 1 or current_node[0] == 0: # 1 kannibál
+            new_node = (current_node[0], current_node[1] + 1, 1)
+            if new_node not in visited:
+                open_list.append(new_node)
+                visited.append(new_node)
+                G.add_node(new_node)
+            G.add_edge(current_node, new_node)
+            
+        if current_node[0] >= current_node[1] + 2 or current_node[0] == 0: # 2 kannibál
+            new_node = (current_node[0], current_node[1] + 2, 1)
+            if new_node not in visited:
+                open_list.append(new_node)
+                visited.append(new_node)
+                G.add_node(new_node)
+            G.add_edge(current_node, new_node)
+            
+                
+        
+
+    
+layout = nx.spring_layout(G)
+nx.draw(G, layout, with_labels = True, arrows=True)
+plt.show()
         
     
