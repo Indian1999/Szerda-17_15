@@ -14,7 +14,6 @@ def is_valid(node):
 
 while len(open_list) > 0:
     current_node = open_list.pop(0)
-    print(current_node)
     if current_node[2] == 1: # A hajó a bal parton van
         if current_node[0] - 1 >= current_node[1] or current_node[0] == 1: # 1 misszionárius
             new_node = (current_node[0] - 1, current_node[1], 0)
@@ -111,6 +110,9 @@ while len(open_list) > 0:
     
 layout = nx.planar_layout(G)
 nx.draw(G, layout, with_labels = True, arrows=True)
-plt.show()
+plt.savefig("Állapottér_reprezentáció/Képek/kannibalok.png")
+
+paths = list(nx.all_simple_paths(G, (3,3,1), (0,0,0)))
+print(paths[0])
         
-    
+
