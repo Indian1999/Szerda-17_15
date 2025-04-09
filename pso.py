@@ -28,7 +28,7 @@ c2 = 4 # Gyorsulási eggyütható
 # Részecskék létrehozása
 # 1 részecske - a 6 különböző termékből, hány darabot gyártsunk (számhatos)
 # 1 részecske sebesség 6 számmal írható le (vektor6)
-particles = np.random.randint(0, 300, size = (n_particles, n_products))
+particles = np.random.randint(0, 300, size = (n_particles, n_products)).astype("float64")
 velocities = np.zeros((n_particles, n_products)) # 50*6 os mátrix tele 0-kal
 
 # Korlátozzuk a termékek lehetséges számát
@@ -49,4 +49,28 @@ def evaluate(particle):
     if np.sum(particle * energy) > resource_limits[2]:
         return -np.inf
     return np.sum(particle * revenues)
+
+for _ in range(max_iter):
+    for i in range(len(particles)):
+        score = evaluate(particles[i])
+        if score > pbest_scores[i]:
+            pbest_scores[i] = score
+            pbest[i] = particles[i]
+        if score > gbest_score:
+            gbest_score = score
+            gbest = particles[i]
+            
+        # Számoljuk ki a részecske új sebességét
+        velocities[i] = w * velocities[i] + c1 * np.random.rand() * (pbest[i] - particles[i]) + c2 * np.random.rand() * (gbest - particles[i])
+        
+        # Az aktuális pozíciót megnöveljük a sebességgel
+        particles[i] += velocities[i] 
+        
+        # Ha esetlegesen a korlátokat átlépnénk, akkor korrigáljunk
+        particles[i] = np.clip(particles[i], lower_bounds, upper_bounds)
+        
+print("Az optimális gyártási mennyiségek (legjobb pozíció csoport szinten):", gbest)
+print("Maximális bevétel:", gbest_score)
+        
+
     
