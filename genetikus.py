@@ -6,6 +6,11 @@ MUTATION_RATE = 0.01 # Egy egyed egy karaktere ennyi eséllyel mutálódik
 GENERATIONS = 1000
 CHARS = "aábcdeéfghiíjklmnoóöőpqrstuúüűvwxyzAÁBCDEÉFGHIÍJKLMNOÓÖŐPQRSTUÚÜŰVWXYZ .,?!"
 
+def write_population_to_file(population, file_path):
+    with open(file_path, "w", encoding="utf-8") as f:
+        for egyed in population:
+            f.write(egyed + "\n")
+            
 def random_egyed():
     egyed = ""
     while len(egyed) != len(TARGET):
