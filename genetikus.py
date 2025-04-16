@@ -14,7 +14,7 @@ def random_egyed():
 
 def fitness(egyed):
     fitness_score = 0
-    for i in len(egyed):
+    for i in range(len(egyed)):
         if egyed[i] == TARGET[i]:
             fitness_score += 1
     return fitness_score
@@ -31,6 +31,7 @@ def mutáció(egyed):
             mutált_egyed += random.choice(CHARS)
         else:
             mutált_egyed += char
+    return mutált_egyed
             
 def selection(population, n = 5):
     """
@@ -42,5 +43,24 @@ def selection(population, n = 5):
 
 def genetic_algorithm():
     population = [random_egyed() for i in range(POPULATION_SIZE)]
+    
+    for generation in range(GENERATIONS):
+        best = population[0]
+        for egyed in population:
+            if fitness(egyed) > fitness(best):
+                best = egyed
+        print(f"Generation {generation}: {best} (Fitness: {fitness(best)})")
+        
+        if best == TARGET:
+            print("Optimal solution found!")
+            break
+        
+        new_population = [best]
+        while len(new_population) != POPULATION_SIZE:
+            child = keresztezés(selection(population), selection(population))
+            child = mutáció(child)
+            new_population.append(child)
+            
+        population = new_population[:]
     
 genetic_algorithm()
