@@ -31,6 +31,14 @@ def mutáció(egyed):
             mutált_egyed += random.choice(CHARS)
         else:
             mutált_egyed += char
+            
+def selection(population, n = 5):
+    """
+    Kiválaszt a populációból 5 egyedet, ezek közül a legjobbat visszaadja
+    """
+    egyedek = random.choices(population, k = n)
+    return max(egyedek, key=fitness)
+    
 
 def genetic_algorithm():
     population = [random_egyed() for i in range(POPULATION_SIZE)]
