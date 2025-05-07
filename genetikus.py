@@ -1,8 +1,8 @@
 import random
 
-TARGET = "Ez itt a genetikus algoritmus"
+TARGET = "Ez itt a genetikus algoritmus!"
 POPULATION_SIZE = 100
-MUTATION_RATE = 0.01 # Egy egyed egy karaktere ennyi eséllyel mutálódik
+MUTATION_RATE = 0.05 # Egy egyed egy karaktere ennyi eséllyel mutálódik
 GENERATIONS = 1000
 CHARS = "aábcdeéfghiíjklmnoóöőpqrstuúüűvwxyzAÁBCDEÉFGHIÍJKLMNOÓÖŐPQRSTUÚÜŰVWXYZ .,?!"
 
@@ -55,6 +55,7 @@ def genetic_algorithm():
             if fitness(egyed) > fitness(best):
                 best = egyed
         print(f"Generation {generation}: {best} (Fitness: {fitness(best)})")
+        #write_population_to_file(population, f"populations/population_gen{generation}")
         
         if best == TARGET:
             print("Optimal solution found!")
