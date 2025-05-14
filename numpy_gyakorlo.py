@@ -32,5 +32,50 @@ print("Legnagyobb elem indexe:", arr.argmax())
 
 # 8. feladat: Hozzunk létre egy tömböt, ami 100 elemet tartalmaz, a legkisebb 3, 
 # a legnagyobb 80, legyen növekvő sorrendben, egyenletesen elosztva a számokat
-arr = np.linspace(3, 80, 100)
+arr = np.linspace(1, 100, 100)
 print(arr)
+
+# 9. feladat: csináljuk ebből a tömbböl egy 10x5x2-es mátrixot
+# Ahoz hogy ez megcsinálható legyen 10x5x2 = 100
+arr = arr.reshape((10,5,2))
+print(arr)
+print(arr.shape)
+
+# 10. feladat: Csináljunk ebből egy 5x5x2x2-es mátrixot
+# AKkor végezhető el ez az átalakítás, ha 5x5x2x2 = 10x5x2
+arr = arr.reshape((5,5,2,2))
+print(arr.shape)
+
+# 11. feladat: Generáljunk egy 20 elemű random tömböt (1-99)
+tomb = np.random.randint(1, 100, 20)
+print(tomb)
+
+# 12. feladat: Határozzuk meg, hogy hány szám van a tömbben ami az átlagnál nagyobb
+print(tomb.mean())
+print("Az átlagtól nagyobb számok száma:", np.sum(tomb > tomb.mean()))
+
+# 13. feladat: a 7-tel osztható számokat cseréljük ki -1 -re
+tomb[tomb % 7 == 0] = -1
+print(tomb)
+
+# 14. feladat: Hozzunk létre egy aknamezőt:
+# Legyen egy 10x10 mátrixunk, tele 0-val (üres mezőt)
+# És helyezzünk el 10 darab aknát (1) erre a mátrixra
+matrix = np.zeros((10,10))
+aknák = np.random.choice(100, 10, replace=False) # 0-99 számokból kiválasztunk 10-et (ismétlés nélkül)
+matrix[np.unravel_index(aknák, (10,10))] = 1
+print(matrix)
+
+# 15. feladat: Determináns (n x n)-es mátrixokra
+matrix = np.random.randint(1, 10, (8,8))
+print(matrix)
+print(np.linalg.det(matrix))
+
+# 16. feladat: generáljunk le 100 pontot a koordináta rendszerben.
+# Mekkora ezeknek az átlagos távolsága az origótól?
+x = np.random.randint(-100, 101, 100)
+y = np.random.randint(-100, 101, 100)
+distances = np.sqrt(x**2 + y**2)
+print(distances.mean())
+
+
