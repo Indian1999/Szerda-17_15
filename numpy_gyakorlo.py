@@ -78,4 +78,24 @@ y = np.random.randint(-100, 101, 100)
 distances = np.sqrt(x**2 + y**2)
 print(distances.mean())
 
+# 17. feladat: csináljunk egy 100 elemű listát amiben random gyömülcsök vannak
+fruits = np.random.choice(["alma", "banán", "citrom", "dinnye", "málna", "szeder", "körte"], 100)
+print(fruits)
 
+# 18. feladat: Generáljunk le egy aknakeresű táblát!
+minesweaper = np.zeros((10,10))
+mines = np.random.choice(100, 10, replace=False) # 0-99 számokból kiválasztunk 10-et (ismétlés nélkül)
+mine_coords = np.unravel_index(mines, (10,10))
+minesweaper[mine_coords] = -1
+
+# [1, 2, 3]    -> *mine_coords -> 1, 2, 3           zip -> [(1,1), (2,1), (3,2)]
+# [1, 1, 2]                    -> 1, 1, 2
+
+for x, y in zip(*mine_coords):
+    for i in range(max(0, x-1), min(x+2, minesweaper.shape[0])):
+        for j in range(max(0, y-1), min(y+2, minesweaper.shape[1])):
+            if minesweaper[i][j] != -1:
+                minesweaper[i][j] += 1
+
+print(minesweaper)
+            
