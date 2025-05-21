@@ -1,4 +1,5 @@
 import pandas as pd # terminálba: pip install pandas
+import matplotlib.pyplot as plt # pip install matplotlib.pyplot
 
 data = pd.read_csv("NFLX.csv")
 print(data)
@@ -48,3 +49,41 @@ novemeber_2019 = novemeber_2019[novemeber_2019["Date"] <= "2019-11-30"]
 print(novemeber_2019)
 
 print(novemeber_2019.describe())
+
+# Hány napon volt a zárási érték az átlag 5%-os környezetében
+
+close_mean = data["Close"].mean()
+average_days = data[data["Close"] >= close_mean * 0.95]
+average_days = average_days[average_days["Close"] <= close_mean * 1.05]
+
+print(average_days)
+print(f"{len(average_days)} átlagos napot zárt a tőzsdén a Netflix.")
+
+
+
+# Ábrázoljuk grafikonon az összes napra a nyitó értékeket
+
+plt.plot(data["Date"], data["Open"])
+plt.title("Stock values over time")
+plt.ylabel("Price in $")
+plt.xlabel("Date")
+plt.xticks(rotation=45)
+plt.close()
+
+#
+data.set_index("Date", inplace=True)
+print(data)
+monthly_average = data["Close"].resample("ME").mean()
+monthly_average = monthly_average.reset_index()
+monthly_average["Date"] = monthly_average["Date"].dt.to_period("M")
+print(monthly_average)
+
+print(monthly_average.dtypes)
+
+plt.plot(monthly_average["Date"].astype("string"), monthly_average["Close"])
+plt.title("Monthly Stock Values")
+plt.ylabel("Price in USD")
+plt.xlabel("Month")
+plt.xticks(ticks=monthly_average["Date"].astype("string")[::4], rotation = 45)
+plt.grid(True)
+plt.show()
