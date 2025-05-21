@@ -23,3 +23,28 @@ print(type(max_row)) # <class 'pandas.core.frame.DataFrame'>
 max_date = max_row.iloc[0, 0]
 print(f"A nap amikor a legmagasabb volt a részvények értéke: {max_date}.")
 
+# Mennyi volt a záráskori részvény állás, azon a napon, amikor a valaha volt legkisebb értéken állt a részvény?
+
+min_row = data[data["Low"] == all_time_low]
+print(min_row)
+lowest_close = min_row.iloc[0, 4]
+print(f"A záráskori érték a 'legrosszabb' napon: {lowest_close} $.")
+
+# Alap tulajdonságok:
+print(data.dtypes)
+print(data.describe())
+
+# Mennyi volt a záráskori érték 2017-02-10 -én?
+data["Date"] = pd.to_datetime(data["Date"])
+print(data.dtypes)
+filtered_row = data[data["Date"] == "2017-02-10"]
+print(filtered_row)
+filtered_close = filtered_row.iloc[0, 4]
+print(f"Close értéke 2017-02-10-én: {round(filtered_close, 2)} $.")
+
+# Szűrjük ki a 2019 novemberi sorokat
+novemeber_2019 = data[data["Date"] >= "2019-11-01"]
+novemeber_2019 = novemeber_2019[novemeber_2019["Date"] <= "2019-11-30"]
+print(novemeber_2019)
+
+print(novemeber_2019.describe())
