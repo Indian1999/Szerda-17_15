@@ -59,7 +59,72 @@ def day_tip_line(file_path = None, show_fig = True):
     if file_path:
         plt.close()
         
-days_bar_chart(os.path.join(DIAGRAMMOK_PATH, "days_vs_tips_bar.png"), False)
-total_bill_histogram(os.path.join(DIAGRAMMOK_PATH, "total_hist.png"), False)
-total_bill_tip_scatter(os.path.join(DIAGRAMMOK_PATH, "total_bill_tip_scatter_colored.png"), False)
-day_tip_line(os.path.join(DIAGRAMMOK_PATH, "day_tip_line.png"), False)
+def data_line_plot(file_path = None, show_fig = True):
+    sns.lineplot(data=data.drop(columns=["total_bill"]))
+    plt.title("Tip and Size")
+    if file_path: 
+        plt.savefig(file_path)
+    if show_fig:
+        plt.show()
+    if file_path:
+        plt.close()
+        
+def total_bill_histogram(file_path = None, show_fig = True):
+    # kde - vonalat illeszt a diagrammra
+    # hue - szín, mi határozza meg az oszlop színét
+    sns.histplot(data = data, x = "total_bill", kde=True, hue="sex")
+    plt.title("Total amount frequency per sex")
+    plt.xlabel("Total amount")
+    if file_path: 
+        plt.savefig(file_path)
+    if show_fig:
+        plt.show()
+    if file_path:
+        plt.close()
+    
+def determine_tip_percentage():
+    data["tip_perc"] = data["tip"] / data["total_bill"] * 100
+    
+determine_tip_percentage()
+print(data.head())
+
+def tip_perc_vs_day(file_path = None, show_fig = True):
+    sns.lineplot(data = data, x = "day", y = "tip_perc")
+    plt.title("Tip percentage on days")
+    if file_path: 
+        plt.savefig(file_path)
+    if show_fig:
+        plt.show()
+    if file_path:
+        plt.close()
+
+def tip_perc_vs_day(file_path = None, show_fig = True):
+    sns.lineplot(data = data, x = "day", y = "tip_perc")
+    plt.title("Tip percentage on days")
+    if file_path: 
+        plt.savefig(file_path)
+    if show_fig:
+        plt.show()
+    if file_path:
+        plt.close()
+        
+def smokers_tip_perc(file_path = None, show_fig = True):
+    sns.barplot(data = data, x = "smoker", y = "tip_perc", hue = "sex")
+    plt.title("Smoker tip percentage per sex")
+    if file_path: 
+        plt.savefig(file_path)
+    if show_fig:
+        plt.show()
+    if file_path:
+        plt.close()
+        
+smokers_tip_perc(os.path.join(DIAGRAMMOK_PATH, "smoker_tips.png"), False)
+tip_perc_vs_day(os.path.join(DIAGRAMMOK_PATH, "tip_perc_on_days.png"), False)
+total_bill_histogram(os.path.join(DIAGRAMMOK_PATH, "total_amount_hist.png"), False)
+#days_bar_chart(os.path.join(DIAGRAMMOK_PATH, "days_vs_tips_bar.png"), False)
+#total_bill_histogram(os.path.join(DIAGRAMMOK_PATH, "total_hist.png"), False)
+#total_bill_tip_scatter(os.path.join(DIAGRAMMOK_PATH, "total_bill_tip_scatter_colored.png"), False)
+#day_tip_line(os.path.join(DIAGRAMMOK_PATH, "day_tip_line.png"), False)
+#data_line_plot(os.path.join(DIAGRAMMOK_PATH, "tip_size_line.png"), False)
+
+
