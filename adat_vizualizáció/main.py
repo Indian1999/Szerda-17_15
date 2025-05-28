@@ -24,5 +24,20 @@ def days_bar_chart(file_path = None, show_fig = True):
         plt.show() # Megjelenít, törli is azt ami plot-on van
     if file_path:
         plt.close()
+
+# Histogram az egy specifikus barplot (oszlopgriamm), tartományok vizualizációjára használjuk
+def total_bill_histogram(file_path = None, show_fig = True):
+    plt.hist(data["total_bill"])
+    plt.title("Total bill amount frequency")
+    plt.xlabel("Total amount")
+    plt.ylabel("Frequency")
+    if file_path: # Ha a file_path nem None
+        plt.savefig(file_path) # NEM törli a plot tartalmát
+    if show_fig:
+        plt.show() # Megjelenít, törli is azt ami plot-on van
+    if file_path:
+        plt.close()
+    
         
 days_bar_chart(os.path.join(DIAGRAMMOK_PATH, "days_vs_tips_bar.png"), False)
+total_bill_histogram(os.path.join(DIAGRAMMOK_PATH, "total_hist.png"), False)
