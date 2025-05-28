@@ -117,10 +117,23 @@ def smokers_tip_perc(file_path = None, show_fig = True):
         plt.show()
     if file_path:
         plt.close()
-        
-smokers_tip_perc(os.path.join(DIAGRAMMOK_PATH, "smoker_tips.png"), False)
-tip_perc_vs_day(os.path.join(DIAGRAMMOK_PATH, "tip_perc_on_days.png"), False)
-total_bill_histogram(os.path.join(DIAGRAMMOK_PATH, "total_amount_hist.png"), False)
+   
+def day_time_sex(file_path = None, show_fig = True):
+    data["day_time"] = data["day"].values + " " + data["time"].values
+    sns.countplot(data = data, x = "day_time", hue="sex")
+    plt.title("Day-Time frequency per sex")
+    plt.xlabel("Day-Time")
+    if file_path: 
+        plt.savefig(file_path)
+    if show_fig:
+        plt.show()
+    if file_path:
+        plt.close()
+   
+day_time_sex(os.path.join(DIAGRAMMOK_PATH, "day_time_freq_per_sex.png"), False) 
+#smokers_tip_perc(os.path.join(DIAGRAMMOK_PATH, "smoker_tips.png"), False)
+#tip_perc_vs_day(os.path.join(DIAGRAMMOK_PATH, "tip_perc_on_days.png"), False)
+#total_bill_histogram(os.path.join(DIAGRAMMOK_PATH, "total_amount_hist.png"), False)
 #days_bar_chart(os.path.join(DIAGRAMMOK_PATH, "days_vs_tips_bar.png"), False)
 #total_bill_histogram(os.path.join(DIAGRAMMOK_PATH, "total_hist.png"), False)
 #total_bill_tip_scatter(os.path.join(DIAGRAMMOK_PATH, "total_bill_tip_scatter_colored.png"), False)
