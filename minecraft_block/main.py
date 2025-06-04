@@ -35,4 +35,13 @@ df["subcategory"] = df["name"].apply(
 )
 
 category_counts = df.groupby(["category", "subcategory"]).size().reset_index(name="count")
-print(category_counts)
+
+fig = px.sunburst(
+    category_counts,
+    path = ["category", "subcategory"],
+    values = "count",
+    title = "Minecraft item categories"
+)
+
+#fig.show(renderer="browser")
+fig.write_html(os.path.join(dir_path, "minecraft_item_categories.html"))
