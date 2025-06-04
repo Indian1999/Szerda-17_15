@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns # pip install seaborn
+import plotly.express as px
 import os
 
 dir_path = os.path.dirname(__file__)
@@ -26,5 +27,12 @@ def categorize_item(item):
     else:
         return "Other"
 
+# "acacia_boat".split("_") -> ["acacia", "boat"]
+# "rail".split("_") -> ["rail"]   (Misc)
 df["category"] = df.apply(categorize_item, axis = 1)
-print(df.head())
+df["subcategory"] = df["name"].apply(
+    lambda x: x.split("_")[0] if "_" in x else "misc"
+)
+
+category_counts = df.groupby(["category", "subcategory"]).size().reset_index(name="count")
+print(category_counts)
