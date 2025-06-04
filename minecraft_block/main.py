@@ -18,7 +18,7 @@ print(df.head())
 def categorize_item(item):
     if item["is_block"] == True:
         return "Block"
-    elif "tool" in item["name"] or "sword" in item["name"] or "pickaxe" in item["name"] or "shovel" in item["name"]:
+    elif "c:tools" in item["item_tags"]:
         return "Tool"
     elif "armor" in item["name"] or item["name"].endswith(("helmet", "chestplate", "leggings", "boots")):
         return "Armor"
@@ -45,3 +45,21 @@ fig = px.sunburst(
 
 #fig.show(renderer="browser")
 fig.write_html(os.path.join(dir_path, "minecraft_item_categories.html"))
+
+
+# Violin plot category vs stack limit
+sns.violinplot(data=df, x="category", y="stack_limit")
+plt.title("Max stack size per catgory")
+plt.savefig(os.path.join(dir_path, "category_stack_size.png"))
+plt.close()
+
+# Oszlopdiagrammokon a max stack size
+stack_counts = df["stack_limit"].value_counts().reset_index()
+print(stack_counts)
+
+plt.bar(stack_counts["stack_limit"].astype(str), stack_counts["count"])
+plt.title("Stack limit distribution")
+plt.xlabel("Maximum stack size")
+plt.ylabel("Frequency")
+plt.savefig(os.path.join(dir_path, "stack_limit_dist.png"))
+plt.close()
